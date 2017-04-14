@@ -6,6 +6,7 @@ const progressBar = player.querySelector('.progress__filled');
 const toggle = player.querySelector('.toggle');
 const skipButtons = player.querySelectorAll('[data-skip]');
 const ranges = player.querySelectorAll('.player__slider');
+const fullScreen = player.querySelector('.fullscreen');
 
 // build functions
 function togglePlay() {
@@ -39,6 +40,10 @@ function scrub(e) {
 	console.log(e);
 	const scrubTime = (e.offsetX / progress.offsetWidth) * video.duration;
 	video.currentTime = scrubTime;
+}
+
+function fullScreen() {
+	console.log("fullscreen");
 }
 
 // hook up event listeners
