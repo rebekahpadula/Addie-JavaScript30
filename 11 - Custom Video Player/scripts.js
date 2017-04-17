@@ -6,7 +6,7 @@ const progressBar = player.querySelector('.progress__filled');
 const toggle = player.querySelector('.toggle');
 const skipButtons = player.querySelectorAll('[data-skip]');
 const ranges = player.querySelectorAll('.player__slider');
-const fullScreen = player.querySelector('.fullscreen');
+const fullScreenButton = player.querySelector('.fullscreen');
 
 // build functions
 function togglePlay() {
@@ -42,9 +42,21 @@ function scrub(e) {
 	video.currentTime = scrubTime;
 }
 
-function fullScreen() {
-	console.log("fullscreen");
-}
+// function fullScreen() {
+// 	if(player.dataset.fullscreen == 'false') {
+// 		console.log("test");
+// 		player.setAttribute('data-fullscreen', 'true');
+// 		player.style.maxWidth = '90%';
+// 		player.style.width = '100%';
+// 	} else {
+// 		player.setAttribute('data-fullscreen', 'false');
+// 		player.style.maxWidth = '750px';
+// 		player.style.width = 'auto';
+// 		console.log("test test");
+// 	}
+
+// }	
+
 
 // hook up event listeners
 video.addEventListener('click', togglePlay);
@@ -63,6 +75,20 @@ progress.addEventListener('click', scrub);
 progress.addEventListener('mousemove', (e) => mousedown && scrub(e));
 progress.addEventListener('mousedown', () => mousedown = true);
 progress.addEventListener('mouseup', () => mousedown = false);
+
+fullScreenButton.addEventListener('click', function() {
+	if(player.dataset.fullscreen == 'false') {
+	console.log("test");
+	player.setAttribute('data-fullscreen', 'true');
+	player.style.maxWidth = '100%';
+	player.style.width = '100vw';
+	} else {
+	player.setAttribute('data-fullscreen', 'false');
+	player.style.maxWidth = '750px';
+	player.style.width = 'auto';
+	console.log("test test");
+	}
+});
 
 
 

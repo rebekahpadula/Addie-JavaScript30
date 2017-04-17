@@ -24,6 +24,7 @@ body {
   position: relative;
   font-size: 0;
   overflow: hidden;
+  transition: max-width .2s;
 }
 
 .player__video {
