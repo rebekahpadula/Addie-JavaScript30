@@ -54,6 +54,7 @@ function removeArticles(bandName) {
 // using the sort function to alphabetically sort the band names after the "a" "the" and "an"s have been removed, but keeping them in the titles
 const sortedBands = bands.sort((a, b) => removeArticles(a) > removeArticles(b) ? 1 : -1);
 
+// takes the element, sets the inner html to the bands as list items. Using .join to remove commas
 document.querySelector('#bands').innerHTML = sortedBands.map(band => `<li>${band}</li>`).join('');
 
 console.log(sortedBands);
