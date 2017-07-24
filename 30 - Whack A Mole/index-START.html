@@ -36,6 +36,61 @@
   const holes = document.querySelectorAll('.hole');
   const scoreBoard = document.querySelector('.score');
   const moles = document.querySelectorAll('.mole');
+  let lastHole;
+  let timeUp = false;
+  let score = 0;
+
+  function randomTime(min, max) {
+    return Math.round(Math.random() * (max - min) + min);
+  }
+
+  function randomHole(holes) {
+    const idx = Math.floor(Math.random() * holes.length);
+    const hole = holes[idx];
+    // if this returns the same hole twice in a row, re run the function until you get a different hole
+    if (hole === lastHole) {
+      console.log("nah thats the same one");
+      return randomHole(holes);
+    }
+
+    lastHole = hole;
+    return hole;
+  }
+
+  function peep() {
+    // get a some time and get a hole
+    const time = randomTime(200, 1000);
+    const hole = randomHole(holes);
+
+    // add the class that makes the mole pop up
+    hole.classList.add('up');
+    // use setTimeout to remove the class after the set amount of time
+    setTimeout(() => {
+      hole.classList.remove('up');
+      // re run th peep function as long as your time is not up
+      if(!timeUp) peep();
+    }, time);
+  }
+
+  function startGame() {
+    scoreBoard.textContent = 0;
+    timeUp = false;
+    score = 0;
+    peep();
+    setTimeout(() => {
+      timeUp = true;
+    }, 10000);
+  }
+
+  function bonk(e) {
+    if(!e.isTrusted) return; // the isTrusted property on click events tells you if it was a user click or a fake JS click - no cheaters!!
+    score++;
+    this.classList.remove('up');
+    scoreBoard.textContent = score;
+  }
+
+
+  moles.forEach(mole => mole.addEventListener('click', bonk));
 
 </script>
 </body>
